@@ -1,0 +1,114 @@
+{% extends "backstage.html" %}
+{% block head %}
+{{ super() }}
+
+{% endblock head %}
+
+{% block title %}BookStore{% endblock title%}
+
+{% block content%}
+
+
+<br />
+<div class="container-xl">
+  <br />
+  <form method="post" enctype=multipart/form-data action={{ url_for('manager.edit') }} id="form1">
+    <table class="table table-bordered">
+      <tr>
+        <th>商品編號</th>
+        <td><input class="form-control" type="text" value="{{ data.商品編號 }}" name="pid" readonly class="id_input"></td>
+      </tr>
+      <tr>
+        <th>商品名稱</th>
+        <td><input class="form-control" type="text" value="{{ data.商品名稱 }}" name="name" required></td>
+      </tr>
+      <tr>
+        <th>單價</th>
+        <td><input class="form-control" type="text" value="{{ data.單價 }}" name="price" required></td>
+      </tr>
+      <tr>
+        <th>類別</th>
+        <td>
+          <select class="form-control" name="category">
+            {% if data.類別 == 'T-SHIRT' %}
+            <option value="T-SHIRT" selected>T-shirt</option>
+            <option value="HOODIE">Hoodie</option>
+            <option value="SHORTS">Shorts</option>
+            <option value="SWEATSHIRTS">Sweatshirt</option>
+            <option value="PANTS">Pants</option>
+            {% elif data.類別 == 'HOODIE' %}
+            <option value="T-SHIRT">T-shirt</option>
+            <option value="HOODIE" selected>Hoodie</option>
+            <option value="SHORTS">Shorts</option>
+            <option value="SWEATSHIRTS">Sweatshirt</option>
+            <option value="PANTS">Pants</option>
+            {% elif data.類別 == 'SHORTS' %}
+            <option value="T-SHIRT">T-shirt</option>
+            <option value="HOODIE">Hoodie</option>
+            <option value="SHORTS" selected>Shorts</option>
+            <option value="SWEATSHIRTS">Sweatshirt</option>
+            <option value="PANTS">Pants</option>
+            {% elif data.類別 == 'SWEATSHIRTS' %}
+            <option value="T-SHIRT">T-shirt</option>
+            <option value="HOODIE">Hoodie</option>
+            <option value="SHORTS">Shorts</option>
+            <option value="SWEATSHIRTS" selected>Sweatshirt</option>
+            <option value="PANTS">Pants</option>
+            {% else %}
+            <option value="T-SHIRT">T-shirt</option>
+            <option value="HOODIE">Hoodie</option>
+            <option value="SHORTS">Shorts</option>
+            <option value="SWEATSHIRTS">Sweatshirt</option>
+            <option value="PANTS" selected>Pants</option>
+            {% endif %}
+
+          </select>
+      </tr>
+      <tr>
+        <th>商品敘述</th>
+        <td>
+          <textarea class="form-control" name="description">{{ data.商品敘述 }}</textarea>
+          <!-- <textarea class="form-control" name="description">{{ data.商品照片 }}</textarea> -->
+        </td>
+      </tr>
+      <tr>
+        <th>商品圖片</th>
+        <td>
+          <!-- <input type="file" name="file" id="file-uploader" data-target="file-uploader"/> -->
+          <p>※原始圖片※</p>
+          <img src={{data.商品照片}} height=200>
+          <!-- <input type="file" accept="image/*" name="file" id="file-uploader" data-target="file-uploader">原本的 -->
+
+          <!-- 以下這段可讓使用者預覽上傳的圖片 -->
+          <input type="file" accept="image/*" name="file" id="file-uploader" data-target="file-uploader" onchange="preview_image(event)">
+          <p><span class="brown-text img-warm">※註：下方僅提供圖片預覽，上傳後會以中心點進行1:1裁切</span></p>
+          <img id="output_image" height=200 />
+
+          <script type='text/javascript'>
+            function preview_image(event) {
+              var reader = new FileReader();
+              reader.onload = function () {
+                var output = document.getElementById('output_image');
+                output.src = reader.result;
+              }
+              reader.readAsDataURL(event.target.files[0]);
+            }
+          </script>
+
+        </td>
+      </tr>
+    </table>
+  </form>
+  <center>
+    <div class="option">
+      <button class="btn btn-outline-success" type="submit" form="form1">確定修改</button>
+      <a href="{{ url_for('manager.productManager') }}"><button class="btn btn-outline-danger">回商品管理</button></a>
+    </div>
+  </center>
+
+</div>
+
+
+
+
+{% endblock content%}
