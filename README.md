@@ -2,7 +2,7 @@
 [![GitHub release](https://img.shields.io/github/release/Text-Analytics-and-Retrieval/db_class2023)](https://github.com/Text-Analytics-and-Retrieval/db_class2023/releases/latest)
 [![GitHub license](https://img.shields.io/github/license/Text-Analytics-and-Retrieval/db_class2023)](https://github.com/Text-Analytics-and-Retrieval/db_class2023/main/LICENSE)
 
-一套使用Flask開發的網路書店系統，後端使用Oracle資料庫
+一套使用Flask開發的網路鞋店系統，後端使用Oracle資料庫
 <br>
 
 ## 功能
